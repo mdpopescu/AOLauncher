@@ -1,13 +1,19 @@
-﻿using System.Data;
-
-namespace AOLauncher;
+﻿namespace AOLauncher;
 
 public partial class EditForm : Form
 {
-    public EditForm(DataTable data)
+    public string Title
+    {
+        set => lblTitle.Text = value;
+    }
+
+    public object DataSource
+    {
+        set => dgvData.DataSource = value;
+    }
+
+    public EditForm()
     {
         InitializeComponent();
-
-        dgvData.DataSource = data;
     }
 }

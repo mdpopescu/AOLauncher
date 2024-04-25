@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOLauncher", "AOLauncher\AOLauncher.csproj", "{1E1C8363-FFDC-49BF-B34D-1E001DD0796D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOLauncher", "AOLauncher\AOLauncher.csproj", "{1E1C8363-FFDC-49BF-B34D-1E001DD0796D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOLauncher.Library", "AOLauncher.Library\AOLauncher.Library.csproj", "{9B12EF14-9D60-49F2-97C3-379EA42CDA24}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOLauncher.Data", "AOLauncher.Data\AOLauncher.Data.csproj", "{8D2CD653-4DE1-4176-9251-796E034FBBE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{1E1C8363-FFDC-49BF-B34D-1E001DD0796D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E1C8363-FFDC-49BF-B34D-1E001DD0796D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E1C8363-FFDC-49BF-B34D-1E001DD0796D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B12EF14-9D60-49F2-97C3-379EA42CDA24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B12EF14-9D60-49F2-97C3-379EA42CDA24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B12EF14-9D60-49F2-97C3-379EA42CDA24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B12EF14-9D60-49F2-97C3-379EA42CDA24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D2CD653-4DE1-4176-9251-796E034FBBE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D2CD653-4DE1-4176-9251-796E034FBBE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D2CD653-4DE1-4176-9251-796E034FBBE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D2CD653-4DE1-4176-9251-796E034FBBE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

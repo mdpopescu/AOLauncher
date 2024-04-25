@@ -16,6 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AOLauncher.Data\AOLauncher.Data.csproj" />
+    <ProjectReference Include="..\AOLauncher.Library\AOLauncher.Library.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

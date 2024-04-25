@@ -32,6 +32,7 @@
             tableLayoutPanel2 = new TableLayoutPanel();
             btnOk = new Button();
             btnCancel = new Button();
+            lblTitle = new Label();
             dgvData = new DataGridView();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
@@ -42,15 +43,17 @@
             // 
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 1);
-            tableLayoutPanel1.Controls.Add(dgvData, 0, 0);
+            tableLayoutPanel1.Controls.Add(lblTitle, 0, 0);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 2);
+            tableLayoutPanel1.Controls.Add(dgvData, 0, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowCount = 3;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 77F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 64F));
             tableLayoutPanel1.Size = new Size(624, 441);
             tableLayoutPanel1.TabIndex = 0;
             // 
@@ -62,19 +65,19 @@
             tableLayoutPanel2.Controls.Add(btnOk, 0, 0);
             tableLayoutPanel2.Controls.Add(btnCancel, 1, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(4, 368);
+            tableLayoutPanel2.Location = new Point(4, 381);
             tableLayoutPanel2.Margin = new Padding(4);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(616, 69);
+            tableLayoutPanel2.Size = new Size(616, 56);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // btnOk
             // 
             btnOk.Anchor = AnchorStyles.None;
             btnOk.DialogResult = DialogResult.OK;
-            btnOk.Location = new Point(100, 21);
+            btnOk.Location = new Point(100, 14);
             btnOk.Margin = new Padding(4);
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(108, 27);
@@ -86,21 +89,30 @@
             // 
             btnCancel.Anchor = AnchorStyles.None;
             btnCancel.DialogResult = DialogResult.Cancel;
-            btnCancel.Location = new Point(408, 21);
+            btnCancel.Location = new Point(408, 14);
             btnCancel.Margin = new Padding(4);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(108, 27);
             btnCancel.TabIndex = 1;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
+            //
+            // lblTitle
+            //
+            lblTitle.Anchor = AnchorStyles.None;
+            lblTitle.Location = new Point(10, 10);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(100, 10);
+            lblTitle.AutoSize = true;
+            lblTitle.Text = "Header";
             // 
             // dgvData
             // 
             dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvData.Dock = DockStyle.Fill;
-            dgvData.Location = new Point(3, 3);
+            dgvData.Location = new Point(3, 35);
             dgvData.Name = "dgvData";
-            dgvData.Size = new Size(618, 358);
+            dgvData.Size = new Size(618, 339);
             dgvData.TabIndex = 1;
             // 
             // EditForm
@@ -127,6 +139,7 @@
         private TableLayoutPanel tableLayoutPanel2;
         private Button btnOk;
         private Button btnCancel;
+        private Label lblTitle;
         private DataGridView dgvData;
     }
 }

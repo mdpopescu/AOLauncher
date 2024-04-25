@@ -1,4 +1,6 @@
-﻿namespace AOLauncher
+﻿using AOLauncher.Library.Models;
+
+namespace AOLauncher
 {
     partial class MainForm
     {
@@ -104,7 +106,7 @@
             lbAccounts.Location = new Point(20, 59);
             lbAccounts.Name = "lbAccounts";
             lbAccounts.ScrollAlwaysVisible = true;
-            lbAccounts.SelectionMode = SelectionMode.MultiSimple;
+            lbAccounts.SelectionMode = SelectionMode.MultiExtended;
             lbAccounts.Size = new Size(362, 238);
             lbAccounts.TabIndex = 3;
             // 
@@ -130,11 +132,11 @@
             // 
             // accountBindingSource1
             // 
-            accountBindingSource1.DataSource = typeof(Models.Account);
+            accountBindingSource1.DataSource = typeof(Account);
             // 
             // accountBindingSource
             // 
-            accountBindingSource.DataSource = typeof(Models.Account);
+            accountBindingSource.DataSource = typeof(Account);
             // 
             // MainForm
             // 
