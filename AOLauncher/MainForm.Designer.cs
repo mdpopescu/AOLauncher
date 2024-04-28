@@ -58,18 +58,20 @@ namespace AOLauncher
             // 
             // cbInstallations
             // 
+            cbInstallations.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             cbInstallations.DropDownStyle = ComboBoxStyle.DropDownList;
             cbInstallations.FormattingEnabled = true;
             cbInstallations.Location = new Point(141, 11);
             cbInstallations.Name = "cbInstallations";
-            cbInstallations.Size = new Size(413, 26);
+            cbInstallations.Size = new Size(257, 26);
             cbInstallations.TabIndex = 2;
             cbInstallations.SelectedIndexChanged += cbInstallations_SelectedIndexChanged;
             // 
             // btnEditInstallations
             // 
+            btnEditInstallations.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnEditInstallations.Image = (Image)resources.GetObject("btnEditInstallations.Image");
-            btnEditInstallations.Location = new Point(566, 11);
+            btnEditInstallations.Location = new Point(410, 11);
             btnEditInstallations.Name = "btnEditInstallations";
             btnEditInstallations.Size = new Size(40, 26);
             btnEditInstallations.TabIndex = 3;
@@ -86,7 +88,7 @@ namespace AOLauncher
             panel1.Controls.Add(btnLoginSelected);
             panel1.Location = new Point(12, 54);
             panel1.Name = "panel1";
-            panel1.Size = new Size(594, 351);
+            panel1.Size = new Size(438, 351);
             panel1.TabIndex = 4;
             // 
             // btnEditAccounts
@@ -101,13 +103,14 @@ namespace AOLauncher
             // 
             // lbAccounts
             // 
+            lbAccounts.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lbAccounts.FormattingEnabled = true;
             lbAccounts.ItemHeight = 18;
             lbAccounts.Location = new Point(20, 59);
             lbAccounts.Name = "lbAccounts";
             lbAccounts.ScrollAlwaysVisible = true;
             lbAccounts.SelectionMode = SelectionMode.MultiExtended;
-            lbAccounts.Size = new Size(362, 238);
+            lbAccounts.Size = new Size(404, 274);
             lbAccounts.TabIndex = 3;
             // 
             // label2
@@ -121,10 +124,11 @@ namespace AOLauncher
             // 
             // btnLoginSelected
             // 
-            btnLoginSelected.Location = new Point(20, 309);
+            btnLoginSelected.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnLoginSelected.Location = new Point(264, 14);
             btnLoginSelected.Margin = new Padding(4);
             btnLoginSelected.Name = "btnLoginSelected";
-            btnLoginSelected.Size = new Size(208, 26);
+            btnLoginSelected.Size = new Size(160, 26);
             btnLoginSelected.TabIndex = 1;
             btnLoginSelected.Text = "Login Selected";
             btnLoginSelected.UseVisualStyleBackColor = true;
@@ -142,7 +146,7 @@ namespace AOLauncher
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(618, 417);
+            ClientSize = new Size(462, 417);
             Controls.Add(panel1);
             Controls.Add(btnEditInstallations);
             Controls.Add(cbInstallations);

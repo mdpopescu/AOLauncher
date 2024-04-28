@@ -4,7 +4,7 @@ using AOLauncher.Library.Models;
 
 namespace AOLauncher.Library.Services;
 
-public class MainLogic(IDataLayer data, IMainUI ui)
+public class MainLogic(IDataLayer data, IMainUI ui, IAORunner runner)
 {
     public async Task InitializeAsync()
     {
@@ -61,5 +61,19 @@ public class MainLogic(IDataLayer data, IMainUI ui)
 
         await data.SaveInstallationsAsync(installations).ConfigureAwait(false);
         ui.ShowAccounts(installations[installationIndex].Accounts);
+    }
+
+    public async Task LoginAsync(int installationIndex, int[] accountIndices)
+    {
+        if (installationIndex < 0)
+            return;
+
+        var installations = await data.GetInstallationsAsync().ConfigureAwait(false);
+        if (installationIndex >= installations.Count)
+            return;
+
+        var installation = installations[installationIndex];
+        var accounts = installation.Accounts.Where((_, index) => accountIndices.Contains(index)).ToArray();
+        await runner.RunAsync(installations[installationIndex], accounts).ConfigureAwait(false);
     }
 }

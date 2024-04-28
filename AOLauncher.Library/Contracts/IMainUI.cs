@@ -6,6 +6,7 @@ namespace AOLauncher.Library.Contracts;
 public interface IMainUI
 {
     bool EditAccountsEnabled { set; }
+    bool LoginEnabled { set; }
 
     void SetInstallations(IEnumerable<Installation> installations);
     bool EditInstallations(BindingList<Installation> installations);

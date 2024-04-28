@@ -8,6 +8,6 @@ public static class Run
         while (DateTimeOffset.Now - start < limit && predicate())
             await taskFunc().ConfigureAwait(false);
 
-        return predicate();
+        return !predicate();
     }
 }

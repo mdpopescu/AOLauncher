@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using AOLauncher.Library.Contracts;
 using AOLauncher.Library.Helpers;
 using AOLauncher.Library.Models;
 using WindowsInput;
@@ -6,7 +7,7 @@ using WindowsInput.Native;
 
 namespace AOLauncher.Services;
 
-public class AORunner
+public class AORunner : IAORunner
 {
     public async Task RunAsync(Installation installation, params Account[] accounts)
     {
@@ -16,7 +17,7 @@ public class AORunner
             await DetectWindowOpenedAsync(ao).ConfigureAwait(false);
             await LoginAsync(account).ConfigureAwait(false);
 
-            await Task.Delay(500).ConfigureAwait(false);
+            await Task.Delay(1000).ConfigureAwait(false);
         }
     }
 

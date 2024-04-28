@@ -17,11 +17,20 @@ public partial class MainForm : Form, IMainUI
         set => this.UIChange(() => btnEditAccounts.Enabled = value);
     }
 
+    public bool LoginEnabled
+    {
+        set => this.UIChange(() => btnLoginSelected.Enabled = value);
+    }
+
     public MainForm()
     {
         InitializeComponent();
 
-        logic = new MainLogic(data, this);
+        logic = new MainLogic(
+            new DataLayer(SETTINGS_FILE),
+            this,
+            new AORunner()
+        );
     }
 
     public void SetInstallations(IEnumerable<Installation> installations) => this.UIChange(
@@ -84,12 +93,17 @@ public partial class MainForm : Form, IMainUI
         await logic.InitializeAsync();
     }
 
+    protected override void OnResize(EventArgs e)
+    {
+        base.OnResize(e);
+
+        if (WindowState == FormWindowState.Minimized)
+            Hide();
+    }
+
     //
 
     private const string SETTINGS_FILE = "ao.xml";
-
-    private readonly DataLayer data = new(SETTINGS_FILE);
-    private readonly AORunner runner = new();
 
     private readonly MainLogic logic;
 
@@ -112,13 +126,6 @@ public partial class MainForm : Form, IMainUI
 
     private async void btnLoginSelected_Click(object sender, EventArgs e)
     {
-        //await runner.RunAsync(installation, account);
-
-        //using var ao = StartAO(aoDetails);
-        //await DetectWindowOpenedAsync(ao);
-        //await LoginAsync(account);
-
-        //// final wait before processing next one (when logging in multiple accounts)
-        //await Task.Delay(500);
+        await logic.LoginAsync(cbInstallations.SelectedIndex, lbAccounts.SelectedIndices.Cast<int>().ToArray());
     }
 }
