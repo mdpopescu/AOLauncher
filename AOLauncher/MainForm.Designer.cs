@@ -40,11 +40,8 @@ namespace AOLauncher
             lbAccounts = new ListBox();
             label2 = new Label();
             btnLoginSelected = new Button();
-            accountBindingSource1 = new BindingSource(components);
-            accountBindingSource = new BindingSource(components);
+            niMain = new NotifyIcon(components);
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)accountBindingSource1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)accountBindingSource).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -134,13 +131,12 @@ namespace AOLauncher
             btnLoginSelected.UseVisualStyleBackColor = true;
             btnLoginSelected.Click += btnLoginSelected_Click;
             // 
-            // accountBindingSource1
+            // niMain
             // 
-            accountBindingSource1.DataSource = typeof(Account);
-            // 
-            // accountBindingSource
-            // 
-            accountBindingSource.DataSource = typeof(Account);
+            niMain.Icon = (Icon)resources.GetObject("niMain.Icon");
+            niMain.Text = "AO Launcher";
+            niMain.Visible = true;
+            niMain.DoubleClick += niMain_DoubleClick;
             // 
             // MainForm
             // 
@@ -152,13 +148,12 @@ namespace AOLauncher
             Controls.Add(cbInstallations);
             Controls.Add(label1);
             Font = new Font("Verdana", 12F);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "MainForm";
-            Text = "AOLauncher V1.0";
+            Text = "AO Launcher V1.0";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)accountBindingSource1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)accountBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -172,7 +167,6 @@ namespace AOLauncher
         private Label label2;
         private Button btnLoginSelected;
         private Button btnEditAccounts;
-        private BindingSource accountBindingSource1;
-        private BindingSource accountBindingSource;
+        private NotifyIcon niMain;
     }
 }

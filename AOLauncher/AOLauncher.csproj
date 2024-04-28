@@ -9,7 +9,12 @@
 	<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
 	<ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <ApplicationIcon>AOLauncher.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="AOLauncher.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="InputSimulatorCore" Version="1.0.5" />

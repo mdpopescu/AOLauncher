@@ -107,6 +107,13 @@ public partial class MainForm : Form, IMainUI
 
     private readonly MainLogic logic;
 
+    private void RestoreForm()
+    {
+        WindowState = FormWindowState.Minimized;
+        Show();
+        WindowState = FormWindowState.Normal;
+    }
+
     //
 
     private async void btnEditInstallations_Click(object sender, EventArgs e)
@@ -126,6 +133,14 @@ public partial class MainForm : Form, IMainUI
 
     private async void btnLoginSelected_Click(object sender, EventArgs e)
     {
+        WindowState = FormWindowState.Minimized;
+        Hide();
+
         await logic.LoginAsync(cbInstallations.SelectedIndex, lbAccounts.SelectedIndices.Cast<int>().ToArray());
+    }
+
+    private void niMain_DoubleClick(object sender, EventArgs e)
+    {
+        RestoreForm();
     }
 }
