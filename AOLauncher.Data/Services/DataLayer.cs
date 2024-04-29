@@ -5,6 +5,9 @@ using AOLauncher.Library.Models;
 
 namespace AOLauncher.Data.Services;
 
+/// <remarks>
+///     Per https://stackoverflow.com/a/913286/31793 we don't need to Dispose DataSets or DataTables.
+/// </remarks>
 public class DataLayer : IDataLayer
 {
     public DataLayer(string filename)
@@ -51,6 +54,8 @@ public class DataLayer : IDataLayer
 
     //
 
+    private static readonly Type STRING_TYPE = Type.GetType("System.String")!;
+
     private readonly DataSet data = new();
 
     private readonly string filename;
@@ -63,10 +68,10 @@ public class DataLayer : IDataLayer
         var table = new DataTable(tableName);
 
         if (parentTable is not null)
-            table.Columns.Add("ParentKey", Type.GetType("System.String")!);
+            table.Columns.Add("ParentKey", STRING_TYPE);
 
         foreach (var columnName in columnNames)
-            table.Columns.Add(columnName, Type.GetType("System.String")!);
+            table.Columns.Add(columnName, STRING_TYPE);
 
         return table;
     }
