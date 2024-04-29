@@ -33,6 +33,8 @@ namespace AOLauncher
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             label1 = new Label();
+            rbRk5 = new RadioButton();
+            rbRk19 = new RadioButton();
             cbInstallations = new ComboBox();
             btnEditInstallations = new Button();
             panel1 = new Panel();
@@ -52,6 +54,24 @@ namespace AOLauncher
             label1.Size = new Size(103, 18);
             label1.TabIndex = 1;
             label1.Text = "Installation";
+            // 
+            // rbRk5
+            // 
+            rbRk5.Checked = true;
+            rbRk5.Location = new Point(141, 43);
+            rbRk5.Name = "rbRk5";
+            rbRk5.Size = new Size(100, 29);
+            rbRk5.TabIndex = 2;
+            rbRk5.TabStop = true;
+            rbRk5.Text = "Rubi-Ka";
+            // 
+            // rbRk19
+            // 
+            rbRk19.Location = new Point(255, 43);
+            rbRk19.Name = "rbRk19";
+            rbRk19.Size = new Size(143, 29);
+            rbRk19.TabIndex = 2;
+            rbRk19.Text = "Rubi-Ka 2019";
             // 
             // cbInstallations
             // 
@@ -83,9 +103,9 @@ namespace AOLauncher
             panel1.Controls.Add(lbAccounts);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(btnLoginSelected);
-            panel1.Location = new Point(12, 54);
+            panel1.Location = new Point(12, 101);
             panel1.Name = "panel1";
-            panel1.Size = new Size(438, 351);
+            panel1.Size = new Size(438, 304);
             panel1.TabIndex = 4;
             // 
             // btnEditAccounts
@@ -107,7 +127,7 @@ namespace AOLauncher
             lbAccounts.Name = "lbAccounts";
             lbAccounts.ScrollAlwaysVisible = true;
             lbAccounts.SelectionMode = SelectionMode.MultiExtended;
-            lbAccounts.Size = new Size(404, 274);
+            lbAccounts.Size = new Size(404, 220);
             lbAccounts.TabIndex = 3;
             lbAccounts.DoubleClick += lbAccounts_DoubleClick;
             // 
@@ -147,10 +167,13 @@ namespace AOLauncher
             Controls.Add(panel1);
             Controls.Add(btnEditInstallations);
             Controls.Add(cbInstallations);
+            Controls.Add(rbRk19);
+            Controls.Add(rbRk5);
             Controls.Add(label1);
             Font = new Font("Verdana", 12F);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
+            MinimumSize = new Size(478, 0);
             Name = "MainForm";
             Text = "AO Launcher V1.0";
             panel1.ResumeLayout(false);
@@ -161,6 +184,8 @@ namespace AOLauncher
 
         #endregion
         private Label label1;
+        private RadioButton rbRk5;
+        private RadioButton rbRk19;
         private ComboBox cbInstallations;
         private Button btnEditInstallations;
         private Panel panel1;

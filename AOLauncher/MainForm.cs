@@ -12,6 +12,8 @@ namespace AOLauncher;
 [SuppressMessage("ReSharper", "AsyncApostle.ConfigureAwaitHighlighting")]
 public partial class MainForm : Form, IMainUI
 {
+    public Server SelectedServer => rbRk5.Checked ? Server.Rk5 : Server.Rk19;
+
     public bool EditAccountsEnabled
     {
         set => this.UIChange(() => btnEditAccounts.Enabled = value);

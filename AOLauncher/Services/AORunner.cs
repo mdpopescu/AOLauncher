@@ -9,11 +9,11 @@ namespace AOLauncher.Services;
 
 public class AORunner : IAORunner
 {
-    public async Task RunAsync(Installation installation, params Account[] accounts)
+    public async Task RunAsync(Installation installation, Server server, params Account[] accounts)
     {
         foreach (var account in accounts)
         {
-            using var ao = StartAO(installation);
+            using var ao = StartAO(installation, server);
             await DetectWindowOpenedAsync(ao).ConfigureAwait(false);
             await LoginAsync(account).ConfigureAwait(false);
 
@@ -33,7 +33,7 @@ public class AORunner : IAORunner
 
     private readonly InputSimulator input = new();
 
-    private static Process StartAO(Installation installation)
+    private static Process StartAO(Installation installation, Server server)
     {
         Process? ao = null;
         try
@@ -43,7 +43,7 @@ public class AORunner : IAORunner
             ao.StartInfo.WorkingDirectory = installation.Path;
             ao.StartInfo.UseShellExecute = false;
             ao.StartInfo.RedirectStandardInput = true;
-            ao.StartInfo.Arguments = RK5_ARGS;
+            ao.StartInfo.Arguments = server == Server.Rk5 ? RK5_ARGS : RK19_ARGS;
             ao.Start();
             return ao;
         }
