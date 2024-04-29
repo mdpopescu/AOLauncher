@@ -35,9 +35,9 @@ public class DataLayer : IDataLayer
 
     public async Task SaveInstallationsAsync(List<Installation> installations)
     {
-        // Clear doesn't do cascade deletes, so we can't call it but need to do that explicitly
-        for (var i = InstallationsTable.Rows.Count - 1; i >= 0; i--)
-            InstallationsTable.Rows.RemoveAt(i);
+        // Clear doesn't do cascade deletes
+        AccountsTable.Clear();
+        InstallationsTable.Clear();
 
         foreach (var installation in installations)
         {
