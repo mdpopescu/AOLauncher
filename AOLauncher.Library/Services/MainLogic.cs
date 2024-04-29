@@ -30,6 +30,7 @@ public class MainLogic(IDataLayer data, IMainUI ui, IAORunner runner)
     {
         ui.ClearAccounts();
         ui.EditAccountsEnabled = installationIndex >= 0;
+        ui.LoginEnabled = installationIndex >= 0;
 
         if (installationIndex < 0)
             return;
@@ -71,6 +72,8 @@ public class MainLogic(IDataLayer data, IMainUI ui, IAORunner runner)
         var installations = await data.GetInstallationsAsync().ConfigureAwait(false);
         if (installationIndex >= installations.Count)
             return;
+
+        ui.HideForm();
 
         var installation = installations[installationIndex];
         var accounts = installation.Accounts.Where((_, index) => accountIndices.Contains(index)).ToArray();

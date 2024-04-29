@@ -33,6 +33,16 @@ public partial class MainForm : Form, IMainUI
         );
     }
 
+    public void HideForm() => this.UIChange(
+        () =>
+        {
+            {
+                WindowState = FormWindowState.Minimized;
+                Hide();
+            }
+        }
+    );
+
     public void SetInstallations(IEnumerable<Installation> installations) => this.UIChange(
         () =>
         {
@@ -116,31 +126,39 @@ public partial class MainForm : Form, IMainUI
 
     //
 
+    [SuppressMessage("Usage", "IDE1006", Justification = "Company convention for event handlers")]
     private async void btnEditInstallations_Click(object sender, EventArgs e)
     {
         await logic.EditInstallationsAsync();
     }
 
+    [SuppressMessage("Usage", "IDE1006", Justification = "Company convention for event handlers")]
     private async void cbInstallations_SelectedIndexChanged(object sender, EventArgs e)
     {
         await logic.UpdateAccountsAsync(cbInstallations.SelectedIndex);
     }
 
+    [SuppressMessage("Usage", "IDE1006", Justification = "Company convention for event handlers")]
     private async void btnEditAccounts_Click(object sender, EventArgs e)
     {
         await logic.EditAccountsAsync(cbInstallations.SelectedIndex);
     }
 
+    [SuppressMessage("Usage", "IDE1006", Justification = "Company convention for event handlers")]
     private async void btnLoginSelected_Click(object sender, EventArgs e)
     {
-        WindowState = FormWindowState.Minimized;
-        Hide();
-
         await logic.LoginAsync(cbInstallations.SelectedIndex, lbAccounts.SelectedIndices.Cast<int>().ToArray());
     }
 
+    [SuppressMessage("Usage", "IDE1006", Justification = "Company convention for event handlers")]
     private void niMain_DoubleClick(object sender, EventArgs e)
     {
         RestoreForm();
+    }
+
+    [SuppressMessage("Usage", "IDE1006", Justification = "Company convention for event handlers")]
+    private async void lbAccounts_DoubleClick(object sender, EventArgs e)
+    {
+        await logic.LoginAsync(cbInstallations.SelectedIndex, lbAccounts.SelectedIndices.Cast<int>().ToArray());
     }
 }

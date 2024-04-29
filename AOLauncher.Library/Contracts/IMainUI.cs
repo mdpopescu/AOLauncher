@@ -8,6 +8,8 @@ public interface IMainUI
     bool EditAccountsEnabled { set; }
     bool LoginEnabled { set; }
 
+    void HideForm();
+
     void SetInstallations(IEnumerable<Installation> installations);
     bool EditInstallations(BindingList<Installation> installations);
 

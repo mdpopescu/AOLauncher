@@ -109,6 +109,7 @@ namespace AOLauncher
             lbAccounts.SelectionMode = SelectionMode.MultiExtended;
             lbAccounts.Size = new Size(404, 274);
             lbAccounts.TabIndex = 3;
+            lbAccounts.DoubleClick += lbAccounts_DoubleClick;
             // 
             // label2
             // 

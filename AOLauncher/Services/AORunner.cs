@@ -23,6 +23,9 @@ public class AORunner : IAORunner
 
     //
 
+    private const string RK5_ARGS = "IA700453413 IP7505 DU";
+    private const string RK19_ARGS = "IA700453413 IP7506 DU";
+
     private const uint PIXEL_COLOR = 0x00596566;
     private const int KEY_PRESS_DELAY_TIME = 100;
 
@@ -40,7 +43,7 @@ public class AORunner : IAORunner
             ao.StartInfo.WorkingDirectory = installation.Path;
             ao.StartInfo.UseShellExecute = false;
             ao.StartInfo.RedirectStandardInput = true;
-            ao.StartInfo.Arguments = "IA700453413 IP7505 DU"; // default AO args
+            ao.StartInfo.Arguments = RK5_ARGS;
             ao.Start();
             return ao;
         }
