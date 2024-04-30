@@ -10,6 +10,16 @@ public class MainLogic(IDataLayer data, IMainUI ui, IAORunner runner)
     {
         var installations = await data.GetInstallationsAsync().ConfigureAwait(false);
         ui.SetInstallations(installations);
+
+        ui.Settings = await data.LoadSettingsAsync().ConfigureAwait(false);
+    }
+
+    /// <summary>
+    ///     Save the form location and size and the current installation.
+    /// </summary>
+    public async Task SaveSettingsAsync()
+    {
+        await data.SaveSettingsAsync(ui.Settings).ConfigureAwait(false);
     }
 
     public async Task EditInstallationsAsync()
@@ -28,6 +38,9 @@ public class MainLogic(IDataLayer data, IMainUI ui, IAORunner runner)
 
     public async Task UpdateAccountsAsync(int installationIndex)
     {
+        // save the current installation
+        await SaveSettingsAsync().ConfigureAwait(false);
+
         ui.ClearAccounts();
         ui.EditAccountsEnabled = installationIndex >= 0;
         ui.LoginEnabled = installationIndex >= 0;

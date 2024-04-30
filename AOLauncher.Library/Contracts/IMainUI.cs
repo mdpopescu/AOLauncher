@@ -6,6 +6,7 @@ namespace AOLauncher.Library.Contracts;
 public interface IMainUI
 {
     Server SelectedServer { get; }
+    AppSettings Settings { get; set; }
 
     bool EditAccountsEnabled { set; }
     bool LoginEnabled { set; }

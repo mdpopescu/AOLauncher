@@ -1,7 +1,6 @@
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using AOLauncher.Data.Services;
-using AOLauncher.Helpers;
 using AOLauncher.Library.Contracts;
 using AOLauncher.Library.Models;
 using AOLauncher.Library.Services;
@@ -14,86 +13,84 @@ public partial class MainForm : Form, IMainUI
 {
     public Server SelectedServer => rbRk5.Checked ? Server.Rk5 : Server.Rk19;
 
+    public AppSettings Settings
+    {
+        get => new(Location, Size, cbInstallations.Text);
+        set
+        {
+            Location = value.Location;
+            Size = value.Size;
+            cbInstallations.SelectedIndex = cbInstallations.Items.IndexOf(value.Installation);
+        }
+    }
+
     public bool EditAccountsEnabled
     {
-        set => this.UIChange(() => btnEditAccounts.Enabled = value);
+        set => btnEditAccounts.Enabled = value;
     }
 
     public bool LoginEnabled
     {
-        set => this.UIChange(() => btnLoginSelected.Enabled = value);
+        set => btnLoginSelected.Enabled = value;
     }
 
     public MainForm()
     {
-        InitializeComponent();
-
         logic = new MainLogic(
-            new DataLayer(SETTINGS_FILE),
-            this,
+            new DataLayer(AO_SETTINGS_FILE, UI_SETTINGS_FILE),
+            new SafeUIDecorator(this, this),
             new AORunner()
         );
+
+        InitializeComponent();
     }
 
-    public void HideForm() => this.UIChange(
-        () =>
-        {
-            {
-                WindowState = FormWindowState.Minimized;
-                Hide();
-            }
-        }
-    );
+    public void HideForm()
+    {
+        WindowState = FormWindowState.Minimized;
+        Hide();
+    }
 
-    public void SetInstallations(IEnumerable<Installation> installations) => this.UIChange(
-        () =>
-        {
-            cbInstallations.Items.Clear();
-            // ReSharper disable once CoVariantArrayConversion
-            cbInstallations.Items.AddRange(installations.Select(it => it.Name).ToArray());
-            cbInstallations.SelectedIndex = -1;
-        }
-    );
+    public void SetInstallations(IEnumerable<Installation> installations)
+    {
+        cbInstallations.Items.Clear();
+        // ReSharper disable once CoVariantArrayConversion
+        cbInstallations.Items.AddRange(installations.Select(it => it.Name).ToArray());
+        cbInstallations.SelectedIndex = -1;
+    }
 
-    public bool EditInstallations(BindingList<Installation> installations) => this.UIChange(
-        () =>
-        {
-            using var form = new EditForm();
-            form.Title = "Installations";
-            form.DataSource = installations;
-            return form.ShowDialog() == DialogResult.OK;
-        }
-    );
+    public bool EditInstallations(BindingList<Installation> installations)
+    {
+        using var form = new EditForm();
+        form.Title = "Installations";
+        form.DataSource = installations;
+        return form.ShowDialog() == DialogResult.OK;
+    }
 
-    public void ClearAccounts() => this.UIChange(
-        () =>
-        {
-            lbAccounts.DataSource = null;
-            lbAccounts.Items.Clear();
-        }
-    );
+    public void ClearAccounts()
+    {
+        lbAccounts.DataSource = null;
+        lbAccounts.Items.Clear();
+    }
 
-    public void ShowAccounts(IEnumerable<Account> accounts) => this.UIChange(
-        () =>
-        {
-            lbAccounts.DataSource = null;
-            lbAccounts.Items.Clear();
-            lbAccounts.DataSource = accounts;
-            lbAccounts.DisplayMember = nameof(Account.Username);
-            lbAccounts.ValueMember = nameof(Account.Username);
-            lbAccounts.SelectedIndex = -1;
-        }
-    );
+    public void ShowAccounts(IEnumerable<Account> accounts)
+    {
+        lbAccounts.DataSource = null;
+        lbAccounts.Items.Clear();
+        lbAccounts.DataSource = accounts;
+        lbAccounts.DisplayMember = nameof(Account.Username);
+        lbAccounts.ValueMember = nameof(Account.Username);
+        lbAccounts.SelectedIndex = -1;
+    }
 
-    public bool EditAccounts(BindingList<Account> accounts) => this.UIChange(
-        () =>
-        {
-            using var form = new EditForm();
-            form.Title = "Accounts";
-            form.DataSource = accounts;
-            return form.ShowDialog() == DialogResult.OK;
-        }
-    );
+
+    public bool EditAccounts(BindingList<Account> accounts)
+    {
+        using var form = new EditForm();
+        form.Title = "Accounts";
+        form.DataSource = accounts;
+        return form.ShowDialog() == DialogResult.OK;
+    }
 
     //
 
@@ -113,9 +110,18 @@ public partial class MainForm : Form, IMainUI
             Hide();
     }
 
+    // ReSharper disable once AvoidAsyncVoid
+    protected override async void OnClosed(EventArgs e)
+    {
+        base.OnClosed(e);
+
+        await logic.SaveSettingsAsync();
+    }
+
     //
 
-    private const string SETTINGS_FILE = "ao.xml";
+    private const string AO_SETTINGS_FILE = "ao_settings.xml";
+    private const string UI_SETTINGS_FILE = "ui_settings.txt";
 
     private readonly MainLogic logic;
 

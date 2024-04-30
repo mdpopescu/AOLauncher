@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Drawing;
 using AOLauncher.Data.Helpers;
 using AOLauncher.Library.Contracts;
 using AOLauncher.Library.Models;
@@ -10,9 +11,10 @@ namespace AOLauncher.Data.Services;
 /// </remarks>
 public class DataLayer : IDataLayer
 {
-    public DataLayer(string filename)
+    public DataLayer(string aoSettingsFile, string uiSettingsFile)
     {
-        this.filename = filename;
+        this.aoSettingsFile = aoSettingsFile;
+        this.uiSettingsFile = uiSettingsFile;
 
         InstallationsTable = CreateTable(null, "Installations", "Name", "Path");
         AccountsTable = CreateTable(InstallationsTable, "Accounts", "Username", "Password");
@@ -52,13 +54,42 @@ public class DataLayer : IDataLayer
         await SaveAsync().ConfigureAwait(false);
     }
 
+    public async Task<AppSettings> LoadSettingsAsync()
+    {
+        try
+        {
+            var lines = await File.ReadAllLinesAsync(uiSettingsFile).ConfigureAwait(false);
+            var location = new Point(int.Parse(lines[0]), int.Parse(lines[1]));
+            var size = new Size(int.Parse(lines[2]), int.Parse(lines[3]));
+            return new AppSettings(location, size, lines[4]);
+        }
+        catch
+        {
+            return new AppSettings(new Point(100, 100), new Size(478, 456), "");
+        }
+    }
+
+    public async Task SaveSettingsAsync(AppSettings settings)
+    {
+        var lines = new[]
+        {
+            settings.Location.X.ToString(),
+            settings.Location.Y.ToString(),
+            settings.Size.Width.ToString(),
+            settings.Size.Height.ToString(),
+            settings.Installation,
+        };
+        await File.WriteAllLinesAsync(uiSettingsFile, lines).ConfigureAwait(false);
+    }
+
     //
 
     private static readonly Type STRING_TYPE = Type.GetType("System.String")!;
 
     private readonly DataSet data = new();
 
-    private readonly string filename;
+    private readonly string aoSettingsFile;
+    private readonly string uiSettingsFile;
 
     private DataTable InstallationsTable { get; }
     private DataTable AccountsTable { get; }
@@ -84,7 +115,7 @@ public class DataLayer : IDataLayer
         try
         {
             data.Clear();
-            data.ReadXml(filename);
+            data.ReadXml(aoSettingsFile);
         }
         catch
         {
@@ -97,7 +128,7 @@ public class DataLayer : IDataLayer
     {
         await Task.Delay(1).ConfigureAwait(false);
 
-        data.WriteXml(filename);
+        data.WriteXml(aoSettingsFile);
         data.AcceptChanges();
     }
 }
