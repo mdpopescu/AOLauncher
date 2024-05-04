@@ -43,7 +43,10 @@ namespace AOLauncher
             label2 = new Label();
             btnLoginSelected = new Button();
             niMain = new NotifyIcon(components);
+            statusStrip1 = new StatusStrip();
+            tslNotification = new ToolStripStatusLabel();
             panel1.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -97,15 +100,14 @@ namespace AOLauncher
             // 
             // panel1
             // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(btnEditAccounts);
             panel1.Controls.Add(lbAccounts);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(btnLoginSelected);
-            panel1.Location = new Point(12, 101);
+            panel1.Location = new Point(0, 78);
             panel1.Name = "panel1";
-            panel1.Size = new Size(438, 304);
+            panel1.Size = new Size(462, 314);
             panel1.TabIndex = 4;
             // 
             // btnEditAccounts
@@ -127,7 +129,7 @@ namespace AOLauncher
             lbAccounts.Name = "lbAccounts";
             lbAccounts.ScrollAlwaysVisible = true;
             lbAccounts.SelectionMode = SelectionMode.MultiExtended;
-            lbAccounts.Size = new Size(404, 220);
+            lbAccounts.Size = new Size(428, 220);
             lbAccounts.TabIndex = 3;
             lbAccounts.DoubleClick += lbAccounts_DoubleClick;
             // 
@@ -143,7 +145,7 @@ namespace AOLauncher
             // btnLoginSelected
             // 
             btnLoginSelected.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnLoginSelected.Location = new Point(264, 14);
+            btnLoginSelected.Location = new Point(288, 14);
             btnLoginSelected.Margin = new Padding(4);
             btnLoginSelected.Name = "btnLoginSelected";
             btnLoginSelected.Size = new Size(160, 26);
@@ -159,11 +161,27 @@ namespace AOLauncher
             niMain.Visible = true;
             niMain.DoubleClick += niMain_DoubleClick;
             // 
+            // statusStrip1
+            // 
+            statusStrip1.Items.AddRange(new ToolStripItem[] { tslNotification });
+            statusStrip1.Location = new Point(0, 395);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(462, 22);
+            statusStrip1.TabIndex = 5;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // tslNotification
+            // 
+            tslNotification.Name = "tslNotification";
+            tslNotification.Size = new Size(23, 17);
+            tslNotification.Text = "OK";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(462, 417);
+            Controls.Add(statusStrip1);
             Controls.Add(panel1);
             Controls.Add(btnEditInstallations);
             Controls.Add(cbInstallations);
@@ -178,6 +196,8 @@ namespace AOLauncher
             Text = "AO Launcher V1.0";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -194,5 +214,7 @@ namespace AOLauncher
         private Button btnLoginSelected;
         private Button btnEditAccounts;
         private NotifyIcon niMain;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel tslNotification;
     }
 }

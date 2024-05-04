@@ -39,7 +39,10 @@ public partial class MainForm : Form, IMainUI
         logic = new MainLogic(
             new DataLayer(AO_SETTINGS_FILE, UI_SETTINGS_FILE),
             new SafeUIDecorator(this, this),
-            new AORunner()
+            new SafeAORunnerDecorator(
+                new AORunner(),
+                new FormsLogger(tslNotification)
+            )
         );
 
         InitializeComponent();
