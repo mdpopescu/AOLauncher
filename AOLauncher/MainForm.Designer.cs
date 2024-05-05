@@ -100,6 +100,7 @@ namespace AOLauncher
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(btnEditAccounts);
             panel1.Controls.Add(lbAccounts);
@@ -113,7 +114,7 @@ namespace AOLauncher
             // btnEditAccounts
             // 
             btnEditAccounts.Image = (Image)resources.GetObject("btnEditAccounts.Image");
-            btnEditAccounts.Location = new Point(128, 14);
+            btnEditAccounts.Location = new Point(128, 10);
             btnEditAccounts.Name = "btnEditAccounts";
             btnEditAccounts.Size = new Size(40, 26);
             btnEditAccounts.TabIndex = 4;
@@ -125,18 +126,18 @@ namespace AOLauncher
             lbAccounts.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lbAccounts.FormattingEnabled = true;
             lbAccounts.ItemHeight = 18;
-            lbAccounts.Location = new Point(20, 59);
+            lbAccounts.Location = new Point(11, 41);
             lbAccounts.Name = "lbAccounts";
             lbAccounts.ScrollAlwaysVisible = true;
             lbAccounts.SelectionMode = SelectionMode.MultiExtended;
-            lbAccounts.Size = new Size(428, 220);
+            lbAccounts.Size = new Size(437, 256);
             lbAccounts.TabIndex = 3;
             lbAccounts.DoubleClick += lbAccounts_DoubleClick;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(20, 18);
+            label2.Location = new Point(11, 14);
             label2.Name = "label2";
             label2.Size = new Size(81, 18);
             label2.TabIndex = 2;
@@ -145,7 +146,7 @@ namespace AOLauncher
             // btnLoginSelected
             // 
             btnLoginSelected.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnLoginSelected.Location = new Point(288, 14);
+            btnLoginSelected.Location = new Point(288, 10);
             btnLoginSelected.Margin = new Padding(4);
             btnLoginSelected.Name = "btnLoginSelected";
             btnLoginSelected.Size = new Size(160, 26);
