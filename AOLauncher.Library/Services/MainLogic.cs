@@ -43,7 +43,6 @@ public class MainLogic(IDataLayer data, IMainUI ui, IAORunner runner)
 
         ui.ClearAccounts();
         ui.EditAccountsEnabled = installationIndex >= 0;
-        ui.LoginEnabled = installationIndex >= 0;
 
         if (installationIndex < 0)
             return;

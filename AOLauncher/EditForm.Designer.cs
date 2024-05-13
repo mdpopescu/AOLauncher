@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             tableLayoutPanel1 = new TableLayoutPanel();
+            lblTitle = new Label();
             tableLayoutPanel2 = new TableLayoutPanel();
             btnOk = new Button();
             btnCancel = new Button();
-            lblTitle = new Label();
             dgvData = new DataGridView();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
@@ -56,6 +56,16 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 64F));
             tableLayoutPanel1.Size = new Size(624, 441);
             tableLayoutPanel1.TabIndex = 0;
+            // 
+            // lblTitle
+            // 
+            lblTitle.Anchor = AnchorStyles.None;
+            lblTitle.AutoSize = true;
+            lblTitle.Location = new Point(279, 7);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(66, 18);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "Header";
             // 
             // tableLayoutPanel2
             // 
@@ -96,24 +106,18 @@
             btnCancel.TabIndex = 1;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
-            //
-            // lblTitle
-            //
-            lblTitle.Anchor = AnchorStyles.None;
-            lblTitle.Location = new Point(10, 10);
-            lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(100, 10);
-            lblTitle.AutoSize = true;
-            lblTitle.Text = "Header";
             // 
             // dgvData
             // 
+            dgvData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvData.Dock = DockStyle.Fill;
             dgvData.Location = new Point(3, 35);
             dgvData.Name = "dgvData";
+            dgvData.ShowCellToolTips = false;
             dgvData.Size = new Size(618, 339);
             dgvData.TabIndex = 1;
+            dgvData.CellFormatting += dgvData_CellFormatting;
             // 
             // EditForm
             // 
@@ -126,8 +130,10 @@
             Font = new Font("Verdana", 12F);
             Margin = new Padding(4);
             Name = "EditForm";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "AOLauncher - Edit List";
             tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
             ResumeLayout(false);

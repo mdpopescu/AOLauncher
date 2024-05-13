@@ -29,11 +29,6 @@ public partial class MainForm : Form, IMainUI
         set => btnEditAccounts.Enabled = value;
     }
 
-    public bool LoginEnabled
-    {
-        set => btnLoginSelected.Enabled = value;
-    }
-
     public MainForm()
     {
         logic = new MainLogic(
@@ -67,6 +62,7 @@ public partial class MainForm : Form, IMainUI
         using var form = new EditForm();
         form.Title = "Installations";
         form.DataSource = installations;
+        form.HidePassword = false;
         return form.ShowDialog() == DialogResult.OK;
     }
 
@@ -92,6 +88,7 @@ public partial class MainForm : Form, IMainUI
         using var form = new EditForm();
         form.Title = "Accounts";
         form.DataSource = accounts;
+        form.HidePassword = true;
         return form.ShowDialog() == DialogResult.OK;
     }
 
@@ -171,5 +168,10 @@ public partial class MainForm : Form, IMainUI
     private async void lbAccounts_DoubleClick(object sender, EventArgs e)
     {
         await logic.LoginAsync(cbInstallations.SelectedIndex, lbAccounts.SelectedIndices.Cast<int>().ToArray());
+    }
+
+    private void lbAccounts_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        btnLoginSelected.Enabled = lbAccounts.SelectedIndices.Cast<int>().Any();
     }
 }

@@ -9,7 +9,6 @@ public interface IMainUI
     AppSettings Settings { get; set; }
 
     bool EditAccountsEnabled { set; }
-    bool LoginEnabled { set; }
 
     void HideForm();
 

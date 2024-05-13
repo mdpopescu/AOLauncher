@@ -132,6 +132,7 @@ namespace AOLauncher
             lbAccounts.SelectionMode = SelectionMode.MultiExtended;
             lbAccounts.Size = new Size(437, 256);
             lbAccounts.TabIndex = 3;
+            lbAccounts.SelectedIndexChanged += lbAccounts_SelectedIndexChanged;
             lbAccounts.DoubleClick += lbAccounts_DoubleClick;
             // 
             // label2
@@ -146,6 +147,7 @@ namespace AOLauncher
             // btnLoginSelected
             // 
             btnLoginSelected.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnLoginSelected.Enabled = false;
             btnLoginSelected.Location = new Point(288, 10);
             btnLoginSelected.Margin = new Padding(4);
             btnLoginSelected.Name = "btnLoginSelected";

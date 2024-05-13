@@ -20,11 +20,6 @@ internal class SafeUIDecorator(Control control, IMainUI ui) : IMainUI
         set => control.UIChange(() => ui.EditAccountsEnabled = value);
     }
 
-    public bool LoginEnabled
-    {
-        set => control.UIChange(() => ui.LoginEnabled = value);
-    }
-
     public void HideForm() =>
         control.UIChange(ui.HideForm);
 
