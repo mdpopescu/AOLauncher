@@ -13,7 +13,7 @@ public class SafeAORunnerDecorator(IAORunner runner, ILogger logger) : IAORunner
         }
         catch (Exception ex)
         {
-            logger.LogError(ex);
+            logger.Log($"ERROR trying to launch [{installation.Name}] from path [{installation.Path}]: {ex}");
         }
     }
 }

@@ -2,5 +2,5 @@
 
 public interface ILogger
 {
-    public void LogError(Exception ex);
+    public void Log(string message);
 }

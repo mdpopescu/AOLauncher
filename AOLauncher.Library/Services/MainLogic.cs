@@ -89,6 +89,9 @@ public class MainLogic(IDataLayer data, IMainUI ui, IAORunner runner)
 
         var installation = installations[installationIndex];
         var accounts = installation.Accounts.Where((_, index) => accountIndices.Contains(index)).ToArray();
-        await runner.RunAsync(installations[installationIndex], ui.SelectedServer, accounts).ConfigureAwait(false);
+        if (!accounts.Any())
+            return;
+
+        await runner.RunAsync(installation, ui.SelectedServer, accounts).ConfigureAwait(false);
     }
 }

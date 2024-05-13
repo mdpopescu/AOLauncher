@@ -4,8 +4,8 @@ namespace AOLauncher.Services;
 
 internal class FormsLogger(ToolStripItem label) : ILogger
 {
-    public void LogError(Exception ex)
+    public void Log(string message)
     {
-        label.Text = $"ERROR: {ex.Message}";
+        label.Text = message;
     }
 }
