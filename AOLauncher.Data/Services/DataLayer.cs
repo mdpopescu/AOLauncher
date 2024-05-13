@@ -14,8 +14,11 @@ public class DataLayer : IDataLayer
     public DataLayer(string aoSettingsFile, string uiSettingsFile)
     {
         var root = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        this.aoSettingsFile = Path.Combine(root, APP_NAME, aoSettingsFile);
-        this.uiSettingsFile = Path.Combine(root, APP_NAME, uiSettingsFile);
+        var settingsFolder = Path.Combine(root, APP_NAME);
+        Directory.CreateDirectory(settingsFolder);
+
+        this.aoSettingsFile = Path.Combine(settingsFolder, aoSettingsFile);
+        this.uiSettingsFile = Path.Combine(settingsFolder, uiSettingsFile);
 
         InstallationsTable = CreateTable(null, "Installations", "Name", "Path");
         AccountsTable = CreateTable(InstallationsTable, "Accounts", "Username", "Password");
