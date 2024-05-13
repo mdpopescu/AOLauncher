@@ -6,4 +6,4 @@ See it in action:
 
 Download the installer:
 
-[AOLauncher V1.0](https://github.com/mdpopescu/AOLauncher/blob/master/_installer/AOLauncherSetup.exe)
+[AOLauncher V1.0](https://github.com/mdpopescu/AOLauncher/raw/master/_installer/AOLauncherSetup.exe)
