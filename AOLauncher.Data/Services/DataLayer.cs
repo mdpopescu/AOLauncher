@@ -13,8 +13,9 @@ public class DataLayer : IDataLayer
 {
     public DataLayer(string aoSettingsFile, string uiSettingsFile)
     {
-        this.aoSettingsFile = aoSettingsFile;
-        this.uiSettingsFile = uiSettingsFile;
+        var root = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        this.aoSettingsFile = Path.Combine(root, APP_NAME, aoSettingsFile);
+        this.uiSettingsFile = Path.Combine(root, APP_NAME, uiSettingsFile);
 
         InstallationsTable = CreateTable(null, "Installations", "Name", "Path");
         AccountsTable = CreateTable(InstallationsTable, "Accounts", "Username", "Password");
@@ -83,6 +84,8 @@ public class DataLayer : IDataLayer
     }
 
     //
+
+    private const string APP_NAME = "AOLauncher";
 
     private static readonly Type STRING_TYPE = Type.GetType("System.String")!;
 
