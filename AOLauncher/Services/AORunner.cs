@@ -26,8 +26,9 @@ public class AORunner : IAORunner
     private const string RK5_ARGS = "IA700453413 IP7505 DU";
     private const string RK19_ARGS = "IA700453413 IP7506 DU";
 
-    private const uint PIXEL_COLOR = 0x00596566;
     private const int KEY_PRESS_DELAY_TIME = 100;
+
+    private static readonly uint[] PIXEL_COLOR = [0x00596566, 0x00556562];
 
     private static readonly TimeSpan LIMIT = TimeSpan.FromMinutes(1);
 
@@ -67,7 +68,7 @@ public class AORunner : IAORunner
         var hdc = Win32.GetDC(hWnd);
         try
         {
-            if (!await Run.WhileAsync(LIMIT, () => color != PIXEL_COLOR, GetPixelAsync).ConfigureAwait(false))
+            if (!await Run.WhileAsync(LIMIT, () => !PIXEL_COLOR.Contains(color), GetPixelAsync).ConfigureAwait(false))
                 throw new Exception("Failed to start AO.");
         }
         finally
