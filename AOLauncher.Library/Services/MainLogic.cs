@@ -12,6 +12,13 @@ public class MainLogic(IDataLayer data, IMainUI ui, IAORunner runner)
         ui.SetInstallations(installations);
 
         ui.Settings = await data.LoadSettingsAsync().ConfigureAwait(false);
+
+        // reverse order because the menu items get inserted in the first position
+        for (var i = ui.ScreenCount - 1; i >= 0; i--)
+        {
+            var index = i;
+            ui.AddContextMenu($"Center on Screen {index + 1}", () => ui.CenterOnScreen(index));
+        }
     }
 
     /// <summary>

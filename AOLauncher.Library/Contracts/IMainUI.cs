@@ -6,9 +6,11 @@ namespace AOLauncher.Library.Contracts;
 public interface IMainUI
 {
     Server SelectedServer { get; }
-    AppSettings Settings { get; set; }
+    int ScreenCount { get; }
 
     bool EditAccountsEnabled { set; }
+
+    AppSettings Settings { get; set; }
 
     void HideForm();
 
@@ -19,4 +21,7 @@ public interface IMainUI
     void ShowAccounts(IEnumerable<Account> accounts);
 
     bool EditAccounts(BindingList<Account> accounts);
+
+    void AddContextMenu(string text, Action action);
+    void CenterOnScreen(int index);
 }

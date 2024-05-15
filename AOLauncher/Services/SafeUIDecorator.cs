@@ -8,6 +8,7 @@ namespace AOLauncher.Services;
 internal class SafeUIDecorator(Control control, IMainUI ui) : IMainUI
 {
     public Server SelectedServer => control.UIChange(() => ui.SelectedServer);
+    public int ScreenCount => control.UIChange(() => ui.ScreenCount);
 
     public AppSettings Settings
     {
@@ -37,4 +38,10 @@ internal class SafeUIDecorator(Control control, IMainUI ui) : IMainUI
 
     public bool EditAccounts(BindingList<Account> accounts) =>
         control.UIChange(() => ui.EditAccounts(accounts));
+
+    public void AddContextMenu(string text, Action action) =>
+        control.UIChange(() => ui.AddContextMenu(text, action));
+
+    public void CenterOnScreen(int index) =>
+        control.UIChange(() => ui.CenterOnScreen(index));
 }

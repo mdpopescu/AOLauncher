@@ -1,5 +1,5 @@
 #define MyAppName "AOLauncher"
-#define MyAppVersion "1.3"
+#define MyAppVersion "1.4"
 #define MyAppPublisher "Marcel Popescu"
 #define MyAppURL "https://marcelpopescu.com"
 #define MyAppExeName "AOLauncher.exe"

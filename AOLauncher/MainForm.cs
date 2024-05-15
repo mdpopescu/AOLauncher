@@ -12,6 +12,12 @@ namespace AOLauncher;
 public partial class MainForm : Form, IMainUI
 {
     public Server SelectedServer => rbRk5.Checked ? Server.Rk5 : Server.Rk19;
+    public int ScreenCount => Screen.AllScreens.Length;
+
+    public bool EditAccountsEnabled
+    {
+        set => btnEditAccounts.Enabled = value;
+    }
 
     public AppSettings Settings
     {
@@ -22,11 +28,6 @@ public partial class MainForm : Form, IMainUI
             Size = value.Size;
             cbInstallations.SelectedIndex = cbInstallations.Items.IndexOf(value.Installation);
         }
-    }
-
-    public bool EditAccountsEnabled
-    {
-        set => btnEditAccounts.Enabled = value;
     }
 
     public MainForm()
@@ -90,6 +91,28 @@ public partial class MainForm : Form, IMainUI
         form.DataSource = accounts;
         form.HidePassword = true;
         return form.ShowDialog() == DialogResult.OK;
+    }
+
+    public void AddContextMenu(string text, Action action)
+    {
+        var menu = new ToolStripMenuItem(text);
+        menu.Click += (_, _) => action();
+        cmsMain.Items.Insert(0, menu);
+    }
+
+    public void CenterOnScreen(int index)
+    {
+        var screen = Screen.AllScreens[index];
+
+        var workingArea = screen.WorkingArea;
+        Location = new Point
+        {
+            X = Math.Max(workingArea.X, workingArea.X + (workingArea.Width - Width) / 2),
+            Y = Math.Max(workingArea.Y, workingArea.Y + (workingArea.Height - Height) / 2),
+        };
+
+        // reset the size too
+        Size = MinimumSize;
     }
 
     //
@@ -173,5 +196,10 @@ public partial class MainForm : Form, IMainUI
     private void lbAccounts_SelectedIndexChanged(object sender, EventArgs e)
     {
         btnLoginSelected.Enabled = lbAccounts.SelectedIndices.Cast<int>().Any();
+    }
+
+    private void tsmiExit_Click(object sender, EventArgs e)
+    {
+        Close();
     }
 }

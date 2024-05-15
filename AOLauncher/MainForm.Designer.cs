@@ -43,9 +43,12 @@ namespace AOLauncher
             label2 = new Label();
             btnLoginSelected = new Button();
             niMain = new NotifyIcon(components);
+            cmsMain = new ContextMenuStrip(components);
+            tsmiExit = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             tslNotification = new ToolStripStatusLabel();
             panel1.SuspendLayout();
+            cmsMain.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -159,10 +162,24 @@ namespace AOLauncher
             // 
             // niMain
             // 
+            niMain.ContextMenuStrip = cmsMain;
             niMain.Icon = (Icon)resources.GetObject("niMain.Icon");
             niMain.Text = "AO Launcher";
             niMain.Visible = true;
             niMain.DoubleClick += niMain_DoubleClick;
+            // 
+            // cmsMain
+            // 
+            cmsMain.Items.AddRange(new ToolStripItem[] { tsmiExit });
+            cmsMain.Name = "cmsMain";
+            cmsMain.Size = new Size(94, 26);
+            // 
+            // tsmiExit
+            // 
+            tsmiExit.Name = "tsmiExit";
+            tsmiExit.Size = new Size(93, 22);
+            tsmiExit.Text = "Exit";
+            tsmiExit.Click += tsmiExit_Click;
             // 
             // statusStrip1
             // 
@@ -194,11 +211,12 @@ namespace AOLauncher
             Font = new Font("Verdana", 12F);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
-            MinimumSize = new Size(478, 0);
+            MinimumSize = new Size(478, 450);
             Name = "MainForm";
             Text = "AO Launcher V1.0";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            cmsMain.ResumeLayout(false);
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             ResumeLayout(false);
@@ -219,5 +237,7 @@ namespace AOLauncher
         private NotifyIcon niMain;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel tslNotification;
+        private ContextMenuStrip cmsMain;
+        private ToolStripMenuItem tsmiExit;
     }
 }
