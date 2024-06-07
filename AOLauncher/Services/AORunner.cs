@@ -28,7 +28,7 @@ public class AORunner : IAORunner
 
     private const int KEY_PRESS_DELAY_TIME = 100;
 
-    private static readonly uint[] PIXEL_COLOR = [0x00596566, 0x00556562];
+    private static readonly uint[] PIXEL_COLOR = [0x00596566, 0x00556562, 0x0096A5A6];
 
     private static readonly TimeSpan LIMIT = TimeSpan.FromMinutes(1);
 
