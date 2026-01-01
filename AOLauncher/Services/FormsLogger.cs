@@ -6,6 +6,13 @@ internal class FormsLogger(ToolStripItem label) : ILogger
 {
     public void Log(string message)
     {
-        label.Text = message;
+        try
+        {
+            label.Text = message;
+        }
+        catch
+        {
+            // do nothing
+        }
     }
 }
