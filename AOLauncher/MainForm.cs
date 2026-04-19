@@ -21,12 +21,19 @@ public partial class MainForm : Form, IMainUI
 
     public AppSettings Settings
     {
-        get => new(Location, Size, cbInstallations.Text);
+        get
+        {
+            var location = WindowState == FormWindowState.Minimized && RestoreBounds.Width > 0
+                ? RestoreBounds.Location
+                : Location;
+            return new AppSettings(location, Size, cbInstallations.Text);
+        }
         set
         {
             Location = value.Location;
             Size = value.Size;
             cbInstallations.SelectedIndex = cbInstallations.Items.IndexOf(value.Installation);
+            EnsureOnScreen();
         }
     }
 
@@ -54,7 +61,7 @@ public partial class MainForm : Form, IMainUI
     {
         cbInstallations.Items.Clear();
         // ReSharper disable once CoVariantArrayConversion
-        cbInstallations.Items.AddRange(installations.Select(it => it.Name).ToArray());
+        cbInstallations.Items.AddRange([.. installations.Select(it => it.Name)]);
         cbInstallations.SelectedIndex = -1;
     }
 
@@ -117,7 +124,7 @@ public partial class MainForm : Form, IMainUI
 
     //
 
-    // ReSharper disable once AvoidAsyncVoid
+    [SuppressMessage("ReSharper", "AsyncVoidEventHandlerMethod", Justification = "Event handler")]
     protected override async void OnShown(EventArgs e)
     {
         base.OnShown(e);
@@ -133,7 +140,7 @@ public partial class MainForm : Form, IMainUI
             Hide();
     }
 
-    // ReSharper disable once AvoidAsyncVoid
+    [SuppressMessage("ReSharper", "AsyncVoidEventHandlerMethod", Justification = "Event handler")]
     protected override async void OnClosed(EventArgs e)
     {
         base.OnClosed(e);
@@ -153,44 +160,58 @@ public partial class MainForm : Form, IMainUI
         WindowState = FormWindowState.Minimized;
         Show();
         WindowState = FormWindowState.Normal;
+        EnsureOnScreen();
+    }
+
+    private void EnsureOnScreen()
+    {
+        var bounds = new Rectangle(Location, Size);
+        if (Screen.AllScreens.Any(s => s.WorkingArea.IntersectsWith(bounds)))
+            return;
+
+        var screen = Screen.PrimaryScreen ?? Screen.AllScreens[0];
+        var workingArea = screen.WorkingArea;
+        Location = new Point(
+            Math.Max(workingArea.X, workingArea.X + (workingArea.Width - Width) / 2),
+            Math.Max(workingArea.Y, workingArea.Y + (workingArea.Height - Height) / 2)
+        );
     }
 
     //
 
-    [SuppressMessage("Usage", "IDE1006", Justification = "Company convention for event handlers")]
+    [SuppressMessage("ReSharper", "AsyncVoidEventHandlerMethod", Justification = "Event handler")]
     private async void btnEditInstallations_Click(object sender, EventArgs e)
     {
         await logic.EditInstallationsAsync();
     }
 
-    [SuppressMessage("Usage", "IDE1006", Justification = "Company convention for event handlers")]
+    [SuppressMessage("ReSharper", "AsyncVoidEventHandlerMethod", Justification = "Event handler")]
     private async void cbInstallations_SelectedIndexChanged(object sender, EventArgs e)
     {
         await logic.UpdateAccountsAsync(cbInstallations.SelectedIndex);
     }
 
-    [SuppressMessage("Usage", "IDE1006", Justification = "Company convention for event handlers")]
+    [SuppressMessage("ReSharper", "AsyncVoidEventHandlerMethod", Justification = "Event handler")]
     private async void btnEditAccounts_Click(object sender, EventArgs e)
     {
         await logic.EditAccountsAsync(cbInstallations.SelectedIndex);
     }
 
-    [SuppressMessage("Usage", "IDE1006", Justification = "Company convention for event handlers")]
+    [SuppressMessage("ReSharper", "AsyncVoidEventHandlerMethod", Justification = "Event handler")]
     private async void btnLoginSelected_Click(object sender, EventArgs e)
     {
-        await logic.LoginAsync(cbInstallations.SelectedIndex, lbAccounts.SelectedIndices.Cast<int>().ToArray());
+        await logic.LoginAsync(cbInstallations.SelectedIndex, [.. lbAccounts.SelectedIndices.Cast<int>()]);
     }
 
-    [SuppressMessage("Usage", "IDE1006", Justification = "Company convention for event handlers")]
     private void niMain_DoubleClick(object sender, EventArgs e)
     {
         RestoreForm();
     }
 
-    [SuppressMessage("Usage", "IDE1006", Justification = "Company convention for event handlers")]
+    [SuppressMessage("ReSharper", "AsyncVoidEventHandlerMethod", Justification = "Event handler")]
     private async void lbAccounts_DoubleClick(object sender, EventArgs e)
     {
-        await logic.LoginAsync(cbInstallations.SelectedIndex, lbAccounts.SelectedIndices.Cast<int>().ToArray());
+        await logic.LoginAsync(cbInstallations.SelectedIndex, [.. lbAccounts.SelectedIndices.Cast<int>()]);
     }
 
     private void lbAccounts_SelectedIndexChanged(object sender, EventArgs e)
